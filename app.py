@@ -1,15 +1,22 @@
 # import the Flask class from the flask module
 from flask import Flask, render_template, redirect, \
-    url_for, request, session, flash, g
-from functools import wraps
-import sqlite3
+    url_for, request, session, flash
+from functools import wraps import os
+from flask.ext.sqlalchemy import SQLAlchemy
 
 # create the application object
 app = Flask(__name__)
 
 # config
-app.secret_key = 'my precious'
-app.database = 'sample.db'
+#import os
+app.config.from_object(os.environ['APP_SETTINGS'])
+print os.environ['APP_SETTINGS']
+
+# create the sqlalchemy object
+db = SQLAlchemy(app)
+
+# import db schema
+from models import *
 
 
 # login required decorator
@@ -29,20 +36,7 @@ def login_required(f):
 @login_required
 def home():
     # return "Hello, World!"  # return a string
-    posts = []
-    try:
-        g.db = connect_db()
-        cur = g.db.execute('select * from posts')
-
-        for row in cur.fetchall():
-            posts.append(dict(title=row[0], description=row[1]))
-
-        # posts = [dict(title=row[0],
-            # description=row[1]) for row in cur.fetchall()]
-
-        g.db.close()
-    except sqlite3.OperationalError:
-        flash('Missing the DB!')
+    posts = db.session.query(BlogPost).all()
     return render_template('index.html', posts=posts)  # render a template
 
 
@@ -76,9 +70,9 @@ def logout():
 
 # connect to database
 def connect_db():
-    return sqlite3.connect(app.database)
+    return sqlite3.connect('posts.db')
 
 
 # start the server with the 'run()' method
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
