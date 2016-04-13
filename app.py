@@ -1,14 +1,14 @@
 # import the Flask class from the flask module
 from flask import Flask, render_template, redirect, \
     url_for, request, session, flash
-from functools import wraps import os
+from functools import wraps
 from flask.ext.sqlalchemy import SQLAlchemy
 
 # create the application object
 app = Flask(__name__)
 
 # config
-#import os
+import os
 app.config.from_object(os.environ['APP_SETTINGS'])
 print os.environ['APP_SETTINGS']
 
