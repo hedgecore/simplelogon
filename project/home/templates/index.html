@@ -1,15 +1,45 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h1>Welcome to Flask!</h1>
+<h1>Landing Page</h1>
 <br>
 <p>Click <a href="/logout">here</a> to logout.</p>
-<br><br>
-<h3>Posts:</h3>
+<br>
+
+<!-- post form -->
+<h3>Update User Information:</h3>
+<br>
+<form class="form-message" role="form" method="post" action="/">
+  {{ form.csrf_token }}
+  <p>
+    {{ form.name(placeholder="Name") }}
+    <span class="error">
+      {% if form.name.errors %}
+        {% for error in form.name.errors %}
+          {{ error }}
+        {% endfor %}
+      {% endif %}
+    </span>
+  </p>
+  <p>
+  {{ form.email(placeholder="email") }}
+    <span class="error">
+      {% if form.email.errors %}
+        {% for error in form.email.errors %}
+          {{ error }}
+        {% endfor %}
+      {% endif %}
+    </span>
+  </p>
+  <button class="btn btn-sm btn-success" type="submit">Submit</button>
+</form>
+
+<!-- All posts -->
+<h3>About Me:</h3>
 {% for post in posts %}
-  <strong>Title:</strong> {{ post.title }} <br>
-  <strong>Post:</strong> {{ post.description }} <br>
-  <strong>Author:</strong> {{ post.author.name }} <br>
+  <strong>Name:</strong> {{ post.name}} <br>
+  <strong>Email:</strong> {{ post.email }} <br>
+
 <br>
 {% endfor %}
 

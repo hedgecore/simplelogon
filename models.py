@@ -7,19 +7,19 @@ from sqlalchemy.orm import relationship
 
 class BlogPost(db.Model):
 
-    __tablename__ = "posts"
+    __tablename__ = "AboutMe"
 
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String, nullable=False)
-    description = db.Column(db.String, nullable=False)
-    author_id = db.Column(db.Integer, ForeignKey('users.id'))
+    name = db.Column(db.String, nullable=False)
+    email= db.Column(db.String, nullable=False)
+   
 
-    def __init__(self, title, description):
-        self.title = title
-        self.description = description
+    def __init__(self, name, description):
+        self.name = name
+        self.email = email
 
     def __repr__(self):
-        return '<title {}'.format(self.title)
+        return '<email {}'.format(self.email)
 
 
 class User(db.Model):

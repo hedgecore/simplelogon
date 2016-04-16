@@ -7,7 +7,7 @@ from sqlalchemy.orm import relationship
 
 class BlogPost(db.Model):
 
-    __tablename__ = "posts"
+    __tablename__ = "AboutMe"
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String, nullable=False)
@@ -17,6 +17,7 @@ class BlogPost(db.Model):
     def __init__(self, title, description):
         self.title = title
         self.description = description
+        # self.author_id = author_id
 
     def __repr__(self):
         return '<title {}'.format(self.title)
@@ -36,6 +37,21 @@ class User(db.Model):
         self.name = name
         self.email = email
         self.password = bcrypt.generate_password_hash(password)
+
+    def __repr__(self):
+        return '<name {}'.format(self.name)
+
+    def is_authenticated(self):
+        return True
+
+    def is_active(self):
+        return True
+
+    def is_anonymous(self):
+        return False
+
+    def get_id(self):
+        return unicode(self.id)
 
     def __repr__(self):
         return '<name {}'.format(self.name)
