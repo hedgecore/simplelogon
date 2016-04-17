@@ -1,6 +1,3 @@
-
-#### imports ####
-
 from project import db, app, hm
 from project.models import BlogPost
 from forms import MessageForm
