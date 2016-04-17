@@ -8,6 +8,7 @@ from flask.ext.login import login_user, login_required, logout_user
 from form import LoginForm, RegisterForm
 from project import db
 from project.models import User, bcrypt
+#from flask_hmac import Hmac
 
 ################
 #### config ####
@@ -19,12 +20,14 @@ users_blueprint = Blueprint(
 )
 
 
+
 ################
 #### routes ####
 ################
 
 # route for handling the login page logic
 @users_blueprint.route('/login', methods=['GET', 'POST'])
+
 def login():
     error = None
     form = LoginForm(request.form)

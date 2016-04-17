@@ -6,6 +6,8 @@ from flask import Flask
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.bcrypt import Bcrypt
 from flask.ext.login import LoginManager 
+from flask_hmac import Hmac
+from flask_wtf.csrf import CsrfProtect
 import os
 
 ################
@@ -18,6 +20,11 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 app.config.from_object(os.environ['APP_SETTINGS'])
 db = SQLAlchemy(app)
+hm = Hmac(app)
+app.config['HMAC_KEY'] = 'notasecret'
+CsrfProtect(app)
+
+
 
 from project.users.views import users_blueprint
 from project.home.views import home_blueprint

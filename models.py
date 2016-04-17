@@ -1,6 +1,6 @@
 from app import db 
 from project.users.views import bcrypt
-
+from flask_hmac import Hmac 
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import relationship
 
