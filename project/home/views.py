@@ -1,4 +1,4 @@
-from project import db, app, hm
+from project import db, app
 from project.models import BlogPost
 from forms import MessageForm
 #from flask_hmac import Hmac 
