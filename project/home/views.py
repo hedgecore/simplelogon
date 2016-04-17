@@ -4,10 +4,10 @@
 from project import db, app, hm
 from project.models import BlogPost
 from forms import MessageForm
-from flask_hmac import Hmac 
+#from flask_hmac import Hmac 
 from flask import render_template, Blueprint, flash, url_for, redirect, request
 from flask.ext.login import login_required,  current_user
-from flask_wtf.csrf import CsrfProtect
+#from flask_wtf.csrf import CsrfProtect
 
 
 #### config ####
