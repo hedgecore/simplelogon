@@ -1,10 +1,10 @@
 from flask import flash, redirect, render_template, request, \
     url_for, Blueprint
 from flask.ext.login import login_user, login_required, logout_user
+
 from form import LoginForm, RegisterForm
 from project import db
 from project.models import User, bcrypt
-#from flask_hmac import Hmac
 
 ################
 #### config ####
@@ -16,14 +16,11 @@ users_blueprint = Blueprint(
 )
 
 
-
 ################
 #### routes ####
 ################
 
-# route for handling the login page logic
 @users_blueprint.route('/login', methods=['GET', 'POST'])
-
 def login():
     error = None
     form = LoginForm(request.form)
@@ -31,15 +28,16 @@ def login():
         if form.validate_on_submit():
             user = User.query.filter_by(name=request.form['username']).first()
             if user is not None and bcrypt.check_password_hash(
-                    user.password, request.form['password']):
-                #session['logged_in'] = True
+                user.password, request.form['password']
+            ):
                 login_user(user)
-                flash('You were logged in.')
+                flash('You were logged in. Go Crazy.')
                 return redirect(url_for('home.home'))
-                
-            else: 
-                error = 'Invalid Credentials. Please try again.'
+
+            else:
+                error = 'Invalid username or password.'
     return render_template('login.html', form=form, error=error)
+
 
 
 @users_blueprint.route('/logout')
@@ -64,3 +62,4 @@ def register():
         login_user(user)
         return redirect(url_for('home.home'))
     return render_template('register.html', form=form)
+    

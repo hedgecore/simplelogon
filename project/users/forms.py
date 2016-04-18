@@ -26,3 +26,4 @@ class RegisterForm(Form):
             DataRequired(), EqualTo('password', message='Passwords must match.')
         ]
     )
+    
