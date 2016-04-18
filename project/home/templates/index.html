@@ -12,7 +12,7 @@
 <form class="form-message" role="form" method="post" action="/">
   {{ form.csrf_token }}
   <p>
-    {{ form.title(placeholder="title") }}
+    {{ form.title(placeholder="Name") }}
     <span class="error">
       {% if form.title.errors %}
         {% for error in form.title.errors %}
@@ -22,7 +22,7 @@
     </span>
   </p>
   <p>
-  {{ form.description(placeholder="description") }}
+  {{ form.description(placeholder="e-mail") }}
     <span class="error">
       {% if form.description.errors %}
         {% for error in form.description.errors %}
@@ -35,13 +35,9 @@
 
 </form>
 
-<!-- All posts -->
-<h3>About Me:</h3>
-{% for post in posts %}
-  <strong>Name:</strong> {{ post.title}} <br>
-  <strong>Email:</strong> {{ post.description }} <br>
 
-<br>
-{% endfor %}
+
+
+
 
 {% endblock %}

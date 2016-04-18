@@ -5,7 +5,7 @@ from project.models import BlogPost
 db.create_all()
 
 # insert
-db.session.add(BlogPost("user1", "user1@notmail.com"))
+#db.session.add(BlogPost("user1", "user1@notmail.com"))
 #db.session.add(BlogPost("well", "I\'m well."))
 #db.session.add(BlogPost("postgres", "local postgres instance"))
 

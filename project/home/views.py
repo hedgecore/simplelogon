@@ -32,10 +32,10 @@ def home():
         )
         db.session.add(new_message)
         db.session.commit()
-        flash('New entry was successfully posted. Thanks.')
+        flash('Updated entry was successfully posted. Thanks.')
         return redirect(url_for('home.home'))
     else:
-        posts = db.session.query(BlogPost).all()
+        posts = db.session.query(BlogPost).first()
         return render_template(
             'index.html', posts=posts, form=form, error=error)
 
