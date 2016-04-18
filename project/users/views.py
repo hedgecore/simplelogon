@@ -2,7 +2,7 @@ from flask import flash, redirect, render_template, request, \
     url_for, Blueprint
 from flask.ext.login import login_user, login_required, logout_user
 
-from form import LoginForm, RegisterForm
+from forms import LoginForm, RegisterForm
 from project import db
 from project.models import User, bcrypt
 
