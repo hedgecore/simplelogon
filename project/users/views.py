@@ -31,7 +31,7 @@ def login():
                 user.password, request.form['password']
             ):
                 login_user(user)
-                flash('You were logged in. Go Crazy.')
+                flash('You have successfully logged in.')
                 return redirect(url_for('home.home'))
 
             else:
