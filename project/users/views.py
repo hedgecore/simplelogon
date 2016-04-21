@@ -1,24 +1,19 @@
+
 from flask import flash, redirect, render_template, request, \
-    url_for, Blueprint
-from flask.ext.login import login_user, login_required, logout_user
+    url_for, Blueprint   
+from flask.ext.login import login_user, \
+    login_required, logout_user  
 
-from forms import LoginForm, RegisterForm
-from project import db
-from project.models import User, bcrypt
+from .forms import LoginForm, RegisterForm
+from project import db  
+from project.models import User, bcrypt  
 
-################
-#### config ####
-################
 
 users_blueprint = Blueprint(
     'users', __name__,
     template_folder='templates'
-)
+)   
 
-
-################
-#### routes ####
-################
 
 @users_blueprint.route('/login', methods=['GET', 'POST'])
 def login():
@@ -31,7 +26,7 @@ def login():
                 user.password, request.form['password']
             ):
                 login_user(user)
-                flash('You have successfully logged in.')
+                flash('You were logged in. Go Crazy.')
                 return redirect(url_for('home.home'))
 
             else:
@@ -39,16 +34,16 @@ def login():
     return render_template('login.html', form=form, error=error)
 
 
-
-@users_blueprint.route('/logout')
-@login_required
+@users_blueprint.route('/logout')  
+@login_required  
 def logout():
     logout_user()
     flash('You were logged out.')
     return redirect(url_for('home.welcome'))
 
 
-@users_blueprint.route('/register/', methods=['GET', 'POST'])
+@users_blueprint.route(
+    '/register/', methods=['GET', 'POST']) 
 def register():
     form = RegisterForm()
     if form.validate_on_submit():
@@ -62,4 +57,3 @@ def register():
         login_user(user)
         return redirect(url_for('home.home'))
     return render_template('register.html', form=form)
-    

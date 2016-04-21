@@ -12,7 +12,7 @@
 <form class="form-message" role="form" method="post" action="/">
   {{ form.csrf_token }}
   <p>
-    {{ form.title(placeholder="Name") }}
+    {{ form.title(placeholder="Full Name") }}
     <span class="error">
       {% if form.title.errors %}
         {% for error in form.title.errors %}
@@ -22,7 +22,7 @@
     </span>
   </p>
   <p>
-  {{ form.description(placeholder="e-mail") }}
+  {{ form.description(placeholder="e-mail address") }}
     <span class="error">
       {% if form.description.errors %}
         {% for error in form.description.errors %}
@@ -31,13 +31,16 @@
       {% endif %}
     </span>
   </p>
-  <button class="btn btn-sm btn-success" type="submit">Submit</button>
-
+  <button class="btn btn-sm btn-success" type="submit">Post</button>
 </form>
 
-
-
-
-
+<!-- All posts -->
+<h3>User Information:</h3>
+{% for post in posts %}
+  <strong>Name:</strong> {{ post.title }} <br>
+  <strong>E-mail:</strong> {{ post.description }} <br>
+  <strong>Username:</strong> {{ post.author.name }} <br>
+<br>
+{% endfor %}
 
 {% endblock %}

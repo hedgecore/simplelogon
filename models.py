@@ -5,7 +5,7 @@ from sqlalchemy import ForeignKey
 from sqlalchemy.orm import relationship
 
 
-class BlogPost(db.Model):
+class information(db.Model):
 
     __tablename__ = "posts"
 
@@ -31,7 +31,7 @@ class User(db.Model):
     name = db.Column(db.String, nullable=False)
     email = db.Column(db.String, nullable=False)
     password = db.Column(db.String, nullable=False)
-    posts = relationship("BlogPost", backref="author")
+    posts = relationship("information", backref="author")
 
     def __init__(self, name, email, password):
         self.name = name
