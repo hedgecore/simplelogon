@@ -7,6 +7,7 @@ class LoginForm(Form):
 	password = PasswordField('Password', validators=[DataRequired()])
 
 
+
 class RegisterForm(Form):
     username = TextField(
         'username',
