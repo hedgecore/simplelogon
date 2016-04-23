@@ -22,7 +22,7 @@ def csrf_exempt(view):
     return view
 
 
-def csrf(app, on_csrf=Noned):
+def csrf(app, on_csrf=None):
     @app.before_request
     def _csrf_check_exemptions():
         try:
