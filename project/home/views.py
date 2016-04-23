@@ -15,23 +15,9 @@ home_blueprint = Blueprint(
 )
 _exempt_views = []
 
-def csrf_exempt(view):
-    _exempt_views.append(view)
-    return view
-
-
 def csrf(app, on_csrf=None):
     @app.before_request
-    def _csrf_check_exemptions():
-        try:
-            dest = app.view_functions.get(request.endpoint)
-            g._csrf_exempt = dest in _exempt_views
-        except NotFound:
-            g._csrf_exempt = False
-    
-    @app.before_request
     def _csrf_protect():
-        # This simplifies unit testing, wherein CSRF seems to break
         if app.config.get('TESTING'):
             return
         if not g._csrf_exempt:
