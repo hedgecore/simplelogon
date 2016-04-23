@@ -31,5 +31,6 @@
   </p>
   <button class="btn btn-sm btn-success" type="submit">Sign in</button>
 </form>
+<a href="simplelogon.heroku.com/register"> Register a new user </a>
 
 {% endblock %}

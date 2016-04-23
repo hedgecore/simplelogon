@@ -15,6 +15,7 @@ app.config.from_object(os.environ['APP_SETTINGS'])
 #CsrfProtect(app)
 db = SQLAlchemy(app)
 
+
 from project.users.views import users_blueprint
 from project.home.views import home_blueprint
 
@@ -33,3 +34,5 @@ login_manager.make_secure_token = "users.login"
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.filter(User.id == int(user_id)).first()
+
+

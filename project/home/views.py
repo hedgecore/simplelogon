@@ -1,26 +1,28 @@
 from project import db, app
 from project.models import information
 from forms import MessageForm
-
 from flask import render_template, Blueprint, flash, url_for, redirect, request, abort, request, session, g
-from flask.ext.login import login_required,  current_user
+from flask.ext.login import login_required, current_user
 import sqlalchemy 
 from uuid import uuid4
 from werkzeug.routing import NotFound
+
 
 
 home_blueprint = Blueprint(
     'home', __name__,
     template_folder='templates'
 )
+
 _exempt_views = []
+
 
 def csrf_exempt(view):
     _exempt_views.append(view)
     return view
 
 
-def csrf(app, on_csrf=None):
+def csrf(app, on_csrf=Noned):
     @app.before_request
     def _csrf_check_exemptions():
         try:
@@ -30,8 +32,7 @@ def csrf(app, on_csrf=None):
             g._csrf_exempt = False
     
     @app.before_request
-    def _csrf_protect():
-        # This simplifies unit testing, wherein CSRF seems to break
+    def _csrf_protect():    
         if app.config.get('TESTING'):
             return
         if not g._csrf_exempt:
@@ -49,7 +50,6 @@ def csrf(app, on_csrf=None):
     
     app.jinja_env.globals['csrf_token'] = generate_csrf_token
 
-#  decorators 
 @home_blueprint.route('/', methods=['GET', 'POST'])
 @login_required  
 def home():

@@ -4,8 +4,7 @@ from wtforms.validators import DataRequired, Length, Email, EqualTo
 
 class LoginForm(Form):
 	username = TextField('Username', validators=[DataRequired()])
-	password = PasswordField('Password', validators=[DataRequired()])
-
+	password = PasswordField('Password', validators=[DataRequired(), Length(min=8, max=25)])
 
 
 class RegisterForm(Form):
@@ -19,7 +18,7 @@ class RegisterForm(Form):
     )
     password = PasswordField(
         'password',
-        validators=[DataRequired(), Length(min=6, max=25)]
+        validators=[DataRequired(), Length(min=8, max=25)]
     )
     confirm = PasswordField(
         'Repeat password',
