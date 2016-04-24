@@ -10,6 +10,21 @@ users_blueprint = Blueprint(
     'users', __name__,
     template_folder='templates'
 )   
+<<<<<<< HEAD
+=======
+_exempt_views = []
+
+def csrf_exempt(view):
+    _exempt_views.append(view)
+    return view
+
+def generate_csrf_token():
+    if '_csrf_token' not in session:
+        session['_csrf_token'] = str(uuid4())
+    return session['_csrf_token']
+    
+app.jinja_env.globals['csrf_token'] = generate_csrf_token
+>>>>>>> 415c4d83f8fe78b9cb7548bcc76822da518b856d
 
 @users_blueprint.route('/login', methods=['GET', 'POST'])
 def login():

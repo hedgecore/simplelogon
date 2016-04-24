@@ -16,6 +16,7 @@ home_blueprint = Blueprint(
 
 _exempt_views = []
 
+<<<<<<< HEAD
 
 def csrf_exempt(view):
     _exempt_views.append(view)
@@ -33,6 +34,11 @@ def csrf(app, on_csrf=None):
     
     @app.before_request
     def _csrf_protect():    
+=======
+def csrf(app, on_csrf=None):
+    @app.before_request
+    def _csrf_protect():
+>>>>>>> 415c4d83f8fe78b9cb7548bcc76822da518b856d
         if app.config.get('TESTING'):
             return
         if not g._csrf_exempt:
